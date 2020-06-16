@@ -2,6 +2,22 @@
 
 //your code here...
 
+class WhyClass {
+    constructor(purpose, parts) {
+      this.purpose = purpose
+      this.parts = parts
+    }
+    explain() {
+      console.log(this.purpose)
+    }
+    pieces() {
+      console.log(this.parts)
+    }
+  }
+  
+  const why = new WhyClass("Classes are used in OOP to provide a blueprint for creating objects as well as initial values for state and implementations of behavior.", ["Class Name", "Constructor", "Properties", "Methods"]);
+  why.explain()
+  why.pieces()
 
 
 /*2. You are exploring the rainforests of the Amazon.  You have observed many different types of wildlife on your excursion.  To jog your memory, some different types of wildlife that you observed are found in the following URL : https://www.ietravel.com/blog/amazon-rainforest-animals-beginners-guide-21-species.  Feel free to use other resources online if you wish.
@@ -11,7 +27,30 @@ Create a class that can categorize at least 6 of the creatures that you recall o
 
 //your code here...
 
-
+class Wildlife {
+    constructor(type, legs, tails, actions) {
+      this.type = type
+      this.legs = legs
+      this.tails = tails
+      this.actions = actions
+    }
+    showActions() {
+      console.log("This " + this.type + " can " + this.actions[0] + " and " + this.actions[1]);
+    }
+  }
+  
+  const capybara = new Wildlife("mammal", 4, 1, ["graze", "burrow"])
+  capybara.showActions()
+  const dolphin = new Wildlife("mammal", 0, 1, ["swim", "eat fish"])
+  dolphin.showActions()
+  const armadillo = new Wildlife("mammal", 4, 1, ["dig", "scuttle"])
+  armadillo.showActions()
+  const jaguar = new Wildlife("mammal", 4, 1, ["run", "hunt"])
+  jaguar.showActions()
+  const macaw = new Wildlife("bird", 2, 1, ["fly", "caw"])
+  macaw.showActions()
+  const anaconda = new Wildlife("reptile", 0, 1, ["hiss", "slither"])
+  anaconda.showActions()
 
 
 /*3. Convert the following Object Literals into a general class called Shape, and instantiate the class to generate the object literals
@@ -19,8 +58,56 @@ Create a class that can categorize at least 6 of the creatures that you recall o
 
 
 class Shape {
-    //your code here...
-}
+    //can pass in 0 to 3 arguments
+    constructor(name, sides, {length = 0, width = 0, radius = 0} = {}) {
+      this.name = name
+      this.sides = sides
+      
+      if(this.sides.length) {
+        this.base = this.sides[0]
+        let s = ((this.sides[0] + this.sides[1] + this.sides[2]) / 2)
+        let part2 = Math.abs(s * (s - this.sides[0]) * (s - this.sides[1]) * (s - this.sides[2]))
+        this.height = (2 / this.sides[0]) * Math.sqrt(part2)
+      } else if(this.sides == 4) {
+        this.length = length
+        this.width = width
+      } else if(this.sides == 1) {
+        this.radius = radius
+      } else {
+        console.log("Unsupported shape!")
+        return null
+      }
+    }
+   
+    calcArea() {
+      if(this.sides.length) {
+        console.log(`${this.name}'s area is calculated to be : ${.5 * this.base * this.height}`)
+      } else if(this.sides == 4) {
+        console.log(`${this.name}'s area is calculated to be : ${this.length * this.width}`);
+      } else if(this.sides == 1) {
+        console.log(`${this.name}'s area is calculated to be : ${(Math.PI * this.radius**2).toFixed(2)}`);
+      }
+    }
+    calcPerimeter() {
+      if(this.sides.length) {
+        console.log(`${this.name}'s perimeter is calculated to be : ${(this.base) + (this.sides[1] + this.sides[2]) }`)
+      } else if (this.sides == 4) {
+        console.log(`${this.name}'s perimeter is calculated to be : ${(2 * this.length) + (2 * this.width) }`)
+      } else if (this.sides == 1) {
+        console.log("Invalid method for this shape!")
+      }
+    }
+    calcCircumference() {
+      if(this.sides.length || this.sides == 4) {
+        console.log("Invalid method for this shape!")
+      } else {
+        console.log(`${this.name}'s circumference is calculated to be : ${(2 * Math.PI * this.radius).toFixed(2)}`)
+      }
+    }
+  }
+  let triangle = new Shape("triangle", [4, 7, 7])
+  let circle = new Shape("circle", 1, {radius: 5})
+  let rect = new Shape("rectangle", 4, {length: 5, width: 4})
 
 
 const triangle = {
@@ -87,19 +174,28 @@ Bonus Exercises:
 
 */
 
+// class Earth {
+//     name;
+//     planetNum; //distance from the sun.  1-mercury, 2-venus, 3-earth, ...
+
+//     constructor(name,num) {
+//         this.name = name;
+//         this.planetNum = num;
+//     }
+
+// }
+
+// const earth = new Earth('earth',3);
+// console.log(earth);
+
+
 class Earth {
-    name;
-    planetNum; //distance from the sun.  1-mercury, 2-venus, 3-earth, ...
+    static name = "Earth"
+    static num = 3
+  }
+console.log(Earth.name);
+console.log(Earth.num);
 
-    constructor(name,num) {
-        this.name = name;
-        this.planetNum = num;
-    }
-
-}
-
-const earth = new Earth('earth',3);
-console.log(earth);
 
 
 
