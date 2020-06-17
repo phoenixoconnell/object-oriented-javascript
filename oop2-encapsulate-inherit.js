@@ -9,31 +9,100 @@
     //your code here...*/
 
     class Book {
-      #author
-      #publisher
-      constructor(author, publisher) {
-        this.#author = author
-        this.#publisher = publisher
+        #author
+        #publisher
+        constructor(author, publisher) {
+          this.#author = author
+          this.#publisher = publisher
+        }
+        getAuthor() {
+          return this.#author;
+        }
+        getPublisher() {
+          return this.#publisher;
+        }
+        setAuthor(inAuth) {
+          this.#author = inAuth
+        }
+        setPublisher(inPub) {
+          this.#publisher = inPub
+        }
       }
-      getAuthor() {
-        return this.#author;
+      
+      const newBook = new Book("George Martin", "Bantam Spectra");
+      newBook.setAuthor("JK Rowling");
+      newBook.setPublisher("Bloomsbury");
+      console.log(newBook.getAuthor());
+      console.log(newBook.getPublisher());
+      
+      class Author {
+        #name
+        #books
+        constructor(name, books) {
+          this.#name = name
+          this.#books = books
+        }
+        getName() {
+          return this.#name;
+        }
+        getBooks() {
+          return this.#books;
+        }
+        setName(inName) {
+          this.#name = inName
+        }
+        setBooks(inBooks) {
+          this.#books = inBooks
+        }
       }
-      getPublisher() {
-        return this.#publisher;
+      
+      //methods
+      
+      class Publisher {
+        #authors
+        #books
+        constructor(authors, books) {
+          this.#authors = authors
+          this.#books = books
+        }
+        getAuthor() {
+          return this.#author;
+        }
+        getBooks() {
+          return this.#books;
+        }
+        setAuthor(inAuthor) {
+          this.#author = inAuthor
+        }
+        setBooks(inBooks) {
+          this.#books = inBooks
+        }
       }
-      setAuthor(inAuth) {
-        this.#author = inAuth
+      
+      //methods
+      
+      class Review {
+        #rating
+        #user
+        constructor(rating, user) {
+          this.#rating = rating
+          this.#user = user
+        }
+        getRating() {
+          return this.#rating;
+        }
+        getUser() {
+          return this.#user
+        }
+        setRating(inRating) {
+          this.#rating = inRating
+        }
+        setUser(inUser) {
+          this.#user = inUser
+        }
       }
-      setPublisher(inPub) {
-        this.#publisher = inPub
-      }
-    }
-
-    const newBook = new Book("George Martin", "Bantam Spectra");
-    newBook.setAuthor("JK Rowling");
-    newBook.setPublisher("Bloomsbury");
-    console.log(newBook.getAuthor());
-    console.log(newBook.getPublisher());
+      
+      //methods
 
 
 
@@ -152,3 +221,143 @@ Each Book instance should contain instances of the Authors, the Publishers, and 
 
 
     //your code here...
+
+    class Author {
+        #name
+        constructor(name) {
+          this.#name = name
+        }
+        getName() {
+          return this.#name
+        }
+        setName(inName) {
+          this.#name = inName
+        }
+      }
+      
+      const georgeMartin = new Author("George Martin");
+      const jkRowling = new Author("JK Rowling");
+      const jrrTolkien = new Author("JRR Tolkien");
+      const ursulaLeGuin = new Author("Ursula Le Guin");
+      const neilGaiman = new Author("Neil Gaiman");
+      const brandonSanderson = new Author("Brandon Sanderson");
+      
+      georgeMartin.getName();
+      jkRowling.setName("J K Rowling");
+      console.log(georgeMartin.getName());
+      console.log(jkRowling.getName());
+      
+      class Publisher {
+        #authors
+        constructor(authors) {
+          this.#authors = authors
+        }
+        getAuthors() {
+          return this.#authors
+        }
+        setAuthors(inAuthors) {
+          this.#authors = inAuthors
+        }
+      }
+      
+      const bantamSpectra = new Publisher([georgeMartin, jrrTolkien, ursulaLeGuin]);
+      const bloomsbury = new Publisher([jkRowling, neilGaiman, brandonSanderson]);
+      
+      //methods
+      
+      class Review {
+        #rating
+        #user
+        constructor(rating, user) {
+          this.#rating = rating
+          this.#user = user
+        }
+        getRating() {
+          return this.#rating
+        }
+        getUser() {
+          return this.#user
+        }
+        setRating(inRating) {
+          this.#rating = rating
+        }
+        setUser(inUser) {
+          this.#user = user
+        }
+      }
+      
+      const rating1 = new Review(5, "user1");
+      const rating2 = new Review(3, "user2");
+      const rating3 = new Review(1, "user3");
+      const rating4 = new Review(3, "user4");
+      const rating5 = new Review(4, "user5");
+      const rating6 = new Review(2, "user6");
+      const rating7 = new Review(1, "user7");
+      const rating8 = new Review(5, "user8");
+      const rating9 = new Review(4, "user9");
+      const rating10 = new Review(3, "user10");
+      const rating11 = new Review(2, "user11");
+      const rating12 = new Review(1, "user12");
+      
+      class Book {
+        #author
+        #publisher
+        #reviews
+        #title
+        constructor(title, author, publisher, reviews) {
+          this.#title = title
+          this.#author = author
+          this.#publisher = publisher
+          this.#reviews = reviews
+        }
+        getTitle() {
+          return this.#title
+        }
+        getAuthor() {
+          return this.#author
+        }
+        getPublisher() {
+          return this.#publisher
+        }
+        getReviews() {
+          return this.#reviews
+        }
+        setTitle(inTitle) {
+          this.#title = inTitle
+        }
+        setAuthor(inAuthor) {
+          this.#author = inAuthor
+        }
+        setPublisher(inPub) {
+          this.#publisher = inPub
+        }
+        setReviews(inRev) {
+          this.#reviews = inRev
+        }
+      }
+      
+      const aGameOfThrones = new Book("A Game of Thrones", georgeMartin, bantamSpectra, [rating1, rating2]);
+      const harryPotter = new Book("Harry Potter", jkRowling, bloomsbury, [rating3, rating4]);
+      const lordOfTheRings = new Book("Lord of the Rings", jrrTolkien, bantamSpectra, [rating5, rating6]);
+      const aWizardOfEarthsea = new Book("A Wizard of Earthsea", ursulaLeGuin, bantamSpectra, [rating7, rating8]);
+      const americanGods = new Book("American Gods", neilGaiman, bloomsbury, [rating9, rating10]);
+      const theWayOfKings = new Book("The Way of Kings", brandonSanderson, bloomsbury, [rating11, rating12]);
+      
+      //methods
+      
+      class Bookstore {
+        #shelf
+        constructor(books) {
+          this.#shelf = books
+        }
+        getShelf() {
+          return this.#shelf
+        }
+        setShelf(inBooks) {
+          this.#shelf = inBooks
+        }
+      }
+      
+      const corners = new Bookstore([aGameOfThrones, harryPotter, lordOfTheRings, aWizardOfEarthsea, americanGods, theWayOfKings]);
+      
+      //methods
