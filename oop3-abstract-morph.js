@@ -17,14 +17,110 @@ These sub-classes MUST implement the abstract methods of move() and act(), which
 
 */
 
-    class Creature {
-        //your code here...
+class Creature { //abstract
+    constructor() {
+        if(this.constructor == Creature) {
+            throw new Error("Unable to instantiate Abstract class Creature");
+        }
     }
+  move(x, y) {
+    throw new Error('Cannot use Abstract method "move" from subclass');
+  }
+  act(action) {
+    throw new Error('Cannot use Abstract method "act" from subclass');
+  }
+}
 
-    class Human extends Creature {
-        //your code here...
-    }
+// const creature  = new Creature();
+// console.log(creature.move());
 
+
+class Human extends Creature {
+  name;
+  gender;
+  x;
+  y;
+
+  constructor(name, gender, x, y) {
+    super()
+    this.name = name
+    this.gender = gender
+    this.x = x
+    this.y = y
+  }
+  move(x, y) {
+    console.log(`${this.name} is moving to coordinates ${this.x}, ${this.y}.`);
+  }
+  act(action) {
+    console.log(`${this.name} is ${action}.`);
+  }
+  writeCode() {
+    console.log("Eat, sleep, code, repeat.");
+  }
+}
+
+const john = new Human("John", "male", 18, 101);
+john.move();
+john.act("running");
+john.writeCode();
+
+class Cat extends Creature {
+  whiskers;
+  color;
+  x;
+  y;
+  
+  constructor(whiskers, color, x, y) {
+    super()
+    this.whiskers = whiskers
+    this.color = color
+    this.x = x
+    this.y = y
+  }
+  move(x, y) {
+    console.log(`The ${this.color} cat is moving to coordinates ${this.x}, ${this.y}.`);
+  }
+  act(action) {
+    console.log(`The ${this.color} cat is ${action}.`);    
+  }
+  meow() {
+    console.log("Meow meow meow");
+  }
+}
+
+const bughuul = new Cat(20, "black", 31, 80);
+bughuul.move();
+bughuul.act("scratching");
+bughuul.meow();
+
+class Dog extends Creature {
+  legs;
+  tails;
+  x;
+  y;
+  
+  constructor(legs, tails, x, y) {
+    super()
+    this.legs = legs
+    this.tails = tails
+    this.x = x
+    this.y = y
+  }  
+  move(x, y) {
+    console.log(`The dog with ${this.legs} legs is moving to coordinates ${this.x}, ${this.y}.`);
+  }
+  act(action) {
+    console.log(`The dog with ${this.tails} tail is ${action}.`);
+  }
+  bark() {
+    console.log("Woof woof");
+  }
+}
+
+const samara = new Dog(3, 1, 61, 19);
+samara.move();
+samara.act("jumping");
+samara.bark();
 
 
 
@@ -34,89 +130,81 @@ These sub-classes MUST implement the abstract methods of move() and act(), which
 
 class Person {
     name;
-
+  
+    constructor(name) {
+      this.name = name
+    }
     eat() {
         console.log(this.name + " is eating");
     }
-
-    sleep = () => {
+    sleep() {
         console.log(this.name + " is sleeping");
     }
-
-    code = function() {
+    code() {
         console.log(this.name + " is coding");
     }
-
-    repeat = function() {
+    repeat() {
         console.log(this.name + " is repeating the above steps, yet another time");
     }
-
     explain() {
-        //this function should contain a console.log() explaining what you had to do to get the correct functions to work, and the reasoning behind what you did.
-        console.log("this explain method should contain explain what you had to do to get the correct functions to work, and the reasoning behind what you did.");
+        console.log("In order to get the correct functions to work, I added a constructor for subclass calls to super and changed the class method declarations to allow for references to 'this' and ensure correct subclass firing order.");
     }
-
-}
-
-
-class Teacher extends Person {
-
-    //refactor the methods in this Teacher class, so all of these methods override the methods in the Person super class.  
-
-    constructor(name) {
-        super(name);
-        this.name = name;
-    }
-
-    eat() {
-        console.log(this.name + " loves to teach before eating");
-    }
-
-    sleep() {
-        console.log(this.name + " sleeps after preparing the lesson plan");
-    }
-
-    code = () => {
-        console.log(this.name + " codes first, then teaches it the next day.");
-    }
-
-    repeat() {
-        console.log(this.name + " teaches, codes, eats, sleeps, and repeats");
-    }
-}
-
-
-class Student extends Person {
-    //set up your methods in this student class, so all of these methods will override the methods from the super class.
-
-    //eat method should print out - <stduent name> studies, then eats
-
-    //sleep method should print out, <student name> studies coding so much, that they dream about it in their sleep
-
-    //code method should print out, <student name> was first overwhelmed by coding, but kept at it, and now has become a coding guru!
-
-    //repeat method should print out, <student name> keeps on studying, coding, eating, and sleeping, and puts it all on repeat.  
-
-}
-
-
-const teacher = new Teacher("Dr. Teacher");
-
-teacher.explain();
-
-const student = new Student("Pupil Student");
-
-student.explain();
-
-teacher.eat();
-teacher.sleep();
-teacher.code();
-teacher.repeat();
-
-student.eat();
-student.sleep();
-student.code();
-student.repeat();
+  }
+    
+  class Teacher extends Person {
+      constructor(name) {
+          super(name);
+      }
+      eat() {
+          console.log(this.name + " loves to teach before eating");
+      }
+      sleep() {
+          console.log(this.name + " sleeps after preparing the lesson plan");
+      }
+      code() {
+          console.log(this.name + " codes first, then teaches it the next day.");
+      }
+      repeat() {
+          console.log(this.name + " teaches, codes, eats, sleeps, and repeats");
+      }
+  } 
+  
+  class Student extends Person {
+      constructor(name) {
+          super(name);
+      }
+      eat() {
+        console.log(this.name + " studies, then eats");
+      }
+      sleep() {
+        console.log(this.name + " studies coding so much, that they dream about it in their sleep");
+      }
+      code() {
+        console.log(this.name + " was first overwhelmed by coding, but kept at it, and now has become a coding guru!")
+      }
+      repeat() {
+        console.log(this.name + " keeps on studying, coding, eating, and sleeping, and puts it all on repeat.")
+      }
+  }
+  
+  
+  const teacher = new Teacher("Dr. Teacher");
+  
+  teacher.explain();
+  
+  const student = new Student("Pupil Student");
+  
+  student.explain();
+  
+  teacher.eat();
+  teacher.sleep();
+  teacher.code();
+  teacher.repeat();
+  
+  student.eat();
+  student.sleep();
+  student.code();
+  student.repeat();
 
 
 
@@ -128,23 +216,20 @@ student.repeat();
 
 class Cook {
 
-    prepare(food1,food2,food3) {
+    prepare = function(food1,food2,food3) {
         console.log("The cook is cooking " + food1, food2, food3);
     }
-
-    prepare = function() {
+    prepare() {
         console.log('The cook is cooking');
     }
-
     explain = () => {
-        console.log("what could you do to get the prepare function to print out the food items that are being passed in to the function?  Once you figure it out, Write down your thought process in this explain method.");
+        console.log("In order to print out the food items that are being passed in, I had to change the first prepare method to a regular function in order for it to take precedence over the second prepare method which I changed to a standard method. The regular function takes precedence because it is a class field.");
     }
-
-}
-
-const cook = new Cook();
-
-cook.prepare("turkey","salami","pizza");
-
-cook.explain();
+  }
+  
+  const cook = new Cook();
+  
+  cook.prepare("turkey","salami","pizza");
+  
+  cook.explain();
 
